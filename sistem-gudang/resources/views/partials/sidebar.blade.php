@@ -35,27 +35,13 @@
           </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="barang" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Data Barang
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/table" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p></p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/data-table" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Table</p>
-                </a>
-              </li>
-            </ul>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link">
@@ -67,13 +53,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/table" class="nav-link">
+                    <a href="/barangmasuk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Barang Masuk</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/data-table" class="nav-link">
+                    <a href="/barangkeluar" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Barang Keluar</p>
                     </a>
@@ -96,6 +82,32 @@
                         </a>
                       </li>
                     </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                      <p>
+                        Laporan
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="/table" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Stok barang</p>
+                        </a>
+                      </li>
+                    </ul>
+            </li>
+            <li class="nav-item">
+                <a href="/rak" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                      <p>
+                        Rak
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
             </li>
     </nav>
     <!-- /.sidebar-menu -->
