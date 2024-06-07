@@ -1,43 +1,38 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Barang List</h1>
-    <a href="{{ route('barang.create') }}">Create New Barang</a>
-
-    @if ($message = Session::get('success'))
-        <p>{{ $message }}</p>
-    @endif
-
-    <table>
+    <h1>Daftar Barang</h1>
+    <a href="{{ route('barang.create') }}" class="btn btn-primary">Tambah Barang</a>
+    <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nama Barang</th>
                 <th>Deskripsi</th>
                 <th>Harga</th>
                 <th>Jumlah Stok</th>
                 <th>Tanggal Produksi</th>
                 <th>Tanggal Kadaluarsa</th>
-                <th>Actions</th>
+                <th>Nomor Rak</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($barang as $item)
+            @foreach($barangs as $barang)
                 <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->deskripsi }}</td>
-                    <td>{{ $item->harga }}</td>
-                    <td>{{ $item->jumlah_stok }}</td>
-                    <td>{{ $item->tanggal_produksi }}</td>
-                    <td>{{ $item->tanggal_kadaluarsa }}</td>
+                    <td>{{ $barang->nama_barang }}</td>
+                    <td>{{ $barang->deskripsi }}</td>
+                    <td>{{ $barang->harga }}</td>
+                    <td>{{ $barang->jumlah_stok }}</td>
+                    <td>{{ $barang->tanggal_produksi }}</td>
+                    <td>{{ $barang->tanggal_kadaluarsa }}</td>
+                    <td>{{ $barang->rak->no_rak }}</td>
                     <td>
-                        <a href="{{ route('barang.show', $item->id) }}">Show</a>
-                        <a href="{{ route('barang.edit', $item->id) }}">Edit</a>
-                        <form action="{{ route('barang.destroy', $item->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('barang.show', $barang->id) }}" class="btn btn-info">Detail</a>
+                        <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
@@ -45,4 +40,3 @@
         </tbody>
     </table>
 @endsection
-

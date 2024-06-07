@@ -3,36 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Rak;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
     public function index()
     {
-        $barang = Barang::all();
-        return view('pages.barang.index', compact('barang'));
+        $barangs = Barang::all();
+        return view('pages.barang.index', compact('barangs'));
     }
 
     public function create()
     {
-        return view('pages.barang.create');
+       
+        $raks = Rak::all();
+        return view('pages.barang.create', compact('raks'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_barang' => 'required|string|max:255',
-            'deskripsi' => 'required',
+            'nama_barang' => 'required|string',
+            'deskripsi' => 'required|string',
             'harga' => 'required|numeric',
             'jumlah_stok' => 'required|integer',
             'tanggal_produksi' => 'required|date',
             'tanggal_kadaluarsa' => 'required|date',
+            'rak_id' => 'required|exists:rak,id'
         ]);
 
         Barang::create($request->all());
-
-        return redirect()->route('barang.index')
-                         ->with('success', 'Barang created successfully.');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
     }
 
     public function show(Barang $barang)
@@ -41,32 +43,31 @@ class BarangController extends Controller
     }
 
     public function edit(Barang $barang)
-    {
-        return view('pages.barang.edit', compact('barang'));
-    }
+{
+    $raks = Rak::all();
+    return view('pages.barang.edit', compact('barang', 'raks'));
+}
+
 
     public function update(Request $request, Barang $barang)
     {
         $request->validate([
-            'nama_barang' => 'required|string|max:255',
-            'deskripsi' => 'required',
+            'nama_barang' => 'required|string',
+            'deskripsi' => 'required|string',
             'harga' => 'required|numeric',
             'jumlah_stok' => 'required|integer',
             'tanggal_produksi' => 'required|date',
             'tanggal_kadaluarsa' => 'required|date',
+            'rak_id' => 'required|exists:rak,id'
         ]);
 
         $barang->update($request->all());
-
-        return redirect()->route('pages.barang.index')
-                         ->with('success', 'Barang updated successfully.');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil diperbarui.');
     }
 
     public function destroy(Barang $barang)
     {
         $barang->delete();
-
-        return redirect()->route('pages.barang.index')
-                         ->with('success', 'Barang deleted successfully.');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');
     }
 }

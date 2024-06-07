@@ -16,5 +16,10 @@ class Barang extends Model
         'jumlah_stok',
         'tanggal_produksi',
         'tanggal_kadaluarsa',
+        'rak_id'
     ];
+    public function rak()
+    {
+        return $this->belongsTo(Rak::class);
+    }
 }
