@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -29,6 +31,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $username = Auth::user()->username;
         $request->validate([
             'username' => 'required',
             'password' => 'required|min:6',
@@ -40,7 +43,7 @@ class AdminController extends Controller
         $admin = new Admin;
 
         $admin->username = $request->username;
-        $admin->password = $request->password;
+        $admin->password = Hash::make($request->password);
         $admin->nama = $request->nama;
         $admin->no_hp = $request->no_hp;
         $admin->alamat = $request->alamat;
@@ -84,7 +87,7 @@ class AdminController extends Controller
         $admin = admin::find($id);
 
         $admin->username = request('username');
-        $admin->password = request('password');
+        $admin->password = Hash::make($request->password);
         $admin->nama = request('nama');
         $admin->no_hp = request('no_hp');
         $admin->alamat = request('alamat');
