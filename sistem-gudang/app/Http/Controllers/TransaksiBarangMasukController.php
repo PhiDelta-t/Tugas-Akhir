@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransaksiBarangMasuk;
+use App\Models\Barang;
 use App\Models\Supplier;
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -11,59 +12,88 @@ class TransaksiBarangMasukController extends Controller
 {
     public function index()
     {
-        return view('barang_masuk.index');
+        $barang_masuk = TransaksiBarangMasuk::all();
+        return view('barang_masuk.index', compact('barang_masuk'));
     }
 
     public function create()
     {
-        $suppliers = Supplier::all();
-        $admins = Admin::all();
-        return view('barang_masuk.create', compact('suppliers', 'admins'));
+        $barang = Barang::all();
+        $supplier = Supplier::all();
+        $admin = Admin::all();
+        return view('barang_masuk.create', ['barang' => $barang, 'supplier' => $supplier, 'admin' => $admin]);
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            'jumlah_masuk' => 'required|numeric|min:0',
+            'tanggal_masuk' => 'required|date',
+            'barang_id' => 'required',
+            'supplier_id' => 'required',
+            'admin_id' => 'required',
+        ]);
+
+        $transaksi_barang_masuk= new TransaksiBarangMasuk;
+
+        $transaksi_barang_masuk->jumlah_masuk = $request->jumlah_masuk;
+        $transaksi_barang_masuk->tanggal_masuk = $request->tanggal_masuk;
+        $transaksi_barang_masuk->barang_id = $request->barang_id;
+        $transaksi_barang_masuk->supplier_id = $request->supplier_id;
+        $transaksi_barang_masuk->admin_id = $request->admin_id;
+
+        $transaksi_barang_masuk->save();
+
+        return redirect('/barangmasuk');
+
+    }
+
+    public function show(string $id)
+    {
+        $masuk = TransaksiBarangMasuk::find($id);
+        $barang = Barang::all();
+        $supplier = Supplier::all();
+        $admin = Admin::all();
+        return view('barang_masuk.show', compact('masuk', 'barang', 'supplier', 'admin'));
+    }
+
+    public function edit(string $id)
+    {
+        $masuk = TransaksiBarangMasuk::findOrFail($id);
+        $barang = Barang::all();
+        $supplier = Supplier::all();
+        $admin = Admin::all();
+        return view('barang_masuk.edit', compact('masuk', 'barang', 'supplier', 'admin'));
+    }
+
+    public function update(Request $request, string $id)
+    {
         $validatedData = $request->validate([
             'jumlah_masuk' => 'required|integer',
             'tanggal_masuk' => 'required|date',
-            'supplier_id_supplier' => 'required|exists:supplier,id_supplier',
-            'admin_id_admin' => 'required|exists:admin,id_admin',
+            'barang_id' => 'required',
+            'supplier_id' => 'required',
+            'admin_id' => 'required',
         ]);
 
-        TransaksiBarangMasuk::create($validatedData);
+        $transaksi_barang_masuk= TransaksiBarangMasuk::findOrFail($id);;
 
-        return redirect()->route('transaksi_barang_masuk.index')->with('success', 'Transaksi Barang Masuk created successfully.');
+        $transaksi_barang_masuk->jumlah_masuk = $request->jumlah_masuk;
+        $transaksi_barang_masuk->tanggal_masuk = $request->tanggal_masuk;
+        $transaksi_barang_masuk->barang_id = $request->barang_id;
+        $transaksi_barang_masuk->supplier_id = $request->supplier_id;
+        $transaksi_barang_masuk->admin_id = $request->admin_id;
+
+        $transaksi_barang_masuk->save();
+
+        return redirect('/barangmasuk');
     }
 
-    public function show(TransaksiBarangMasuk $transaksiBarangMasuk)
+    public function destroy($id)
     {
-        return view('transaksi_barang_masuk.show', compact('transaksiBarangMasuk'));
-    }
-
-    public function edit(TransaksiBarangMasuk $transaksiBarangMasuk)
-    {
-        $suppliers = Supplier::all();
-        $admins = Admin::all();
-        return view('transaksi_barang_masuk.edit', compact('transaksiBarangMasuk', 'suppliers', 'admins'));
-    }
-
-    public function update(Request $request, TransaksiBarangMasuk $transaksiBarangMasuk)
-    {
-        $validatedData = $request->validate([
-            'jumlah_masuk' => 'required|integer',
-            'tanggal_masuk' => 'required|date',
-            'supplier_id_supplier' => 'required|exists:supplier,id_supplier',
-            'admin_id_admin' => 'required|exists:admin,id_admin',
-        ]);
-
-        $transaksiBarangMasuk->update($validatedData);
-
-        return redirect()->route('transaksi_barang_masuk.index')->with('success', 'Transaksi Barang Masuk updated successfully.');
-    }
-
-    public function destroy(TransaksiBarangMasuk $transaksiBarangMasuk)
-    {
-        $transaksiBarangMasuk->delete();
-        return redirect()->route('transaksi_barang_masuk.index')->with('success', 'Transaksi Barang Masuk deleted successfully.');
+        $transaksi_barang_masuk = TransaksiBarangMasuk::findOrFail($id);
+        $transaksi_barang_masuk->delete();
+        return redirect('/barangmasuk');
+        
     }
 }

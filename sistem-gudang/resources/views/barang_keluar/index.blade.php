@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5">
     <h1>Transaksi Barang Keluar List</h1>
-    <a href="" class="btn btn-primary">Add Transaksi Barang Keluar</a>
+    <a href="/barangkeluar/create" class="btn btn-primary">Add Transaksi Barang Keluar</a>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -21,27 +21,32 @@
                 <th>Admin</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-            {{-- @foreach($transaksiBarangKeluar as $transaksi)
+        </thead><tbody>
+            @forelse ($barang_keluar as $key=>$keluar)
+                <tr>
+                    <td>{{ $keluar->id }}</td>
+                    <td>{{ $keluar->jumlah_keluar }}</td>
+                    <td>{{ $keluar->tanggal_keluar }}</td>
+                    <td>{{ $keluar->barang_id }}</td>
+                    <td>{{ $keluar->admin_id }}</td>
+                    <td>
+                        <form action="/barangkeluar/{{ $keluar->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <a href="/barangkeluar/{{ $keluar->id }}" class="btn btn-info">View</a>
+                            <a href="/barangkeluar/{{ $keluar->id }}/edit" class="btn btn-warning">Edit</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>   
+                @empty
             <tr>
-                <td>{{ $transaksi->id }}</td>
-                <td>{{ $transaksi->jumlah_keluar }}</td>
-                <td>{{ $transaksi->tanggal_keluar }}</td>
-                <td>{{ $transaksi->barang->nama_barang }}</td>
-                <td>{{ $transaksi->admin->nama }}</td>
-                <td>
-                    <a href="{{ route('transaksi_barang_keluar.show', $transaksi->id) }}" class="btn btn-info">View</a>
-                    <a href="{{ route('transaksi_barang_keluar.edit', $transaksi->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('transaksi_barang_keluar.destroy', $transaksi->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <th>Tidak Ada Barang Keluar</th>
             </tr>
-            @endforeach --}}
+            @endforelse
+            
         </tbody>
+       
     </table>
 </div>
 @endsection

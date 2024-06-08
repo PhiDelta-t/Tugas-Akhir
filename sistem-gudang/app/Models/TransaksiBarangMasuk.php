@@ -9,15 +9,16 @@ class TransaksiBarangMasuk extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['jumlah_masuk', 'tanggal_masuk', 'supplier_id_supplier', 'admin_id_admin'];
+    protected $table = 'transaksi_barang_masuk';
+    protected $fillable = ['jumlah_masuk', 'tanggal_masuk', 'barang_id', 'supplier_id', 'admin_id'];
 
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class, 'supplier_id_supplier');
+        return $this->belongsTo(Supplier::class);
     }
 
     public function admin()
     {
-        return $this->belongsTo(User::class, 'admin_id_admin');
+        return $this->belongsTo(Admin::class);
     }
 }
