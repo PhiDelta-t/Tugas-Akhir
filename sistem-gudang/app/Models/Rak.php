@@ -12,7 +12,5 @@ class Rak extends Model
 
     protected $fillable = [
         'no_rak'
-        
     ];
 }
-

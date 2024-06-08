@@ -3,16 +3,16 @@
 @section('content')
     <div class="container-fluid">
         <a href="/rak/create" class="btn btn-primary mb-3">Tambah</a>
-        @if(session('success'))
-        <div class="alert alert-success">{{session('success')}}</div>
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         <table class="table">
             <thead class="thead-light">
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">No Rak</th>
-                <th scope="col">Actions</th>
-              </tr>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">No Rak</th>
+                    <th scope="col">Actions</th>
+                </tr>
             </thead>
             <tbody>
                 @forelse ($rak as $key => $items)
@@ -34,7 +34,7 @@
                 @empty
                     <tr>
                         <td colspan="3">No data rak</td>
-                    </tr>  
+                    </tr>
                 @endforelse
             </tbody>
         </table>

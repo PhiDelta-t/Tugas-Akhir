@@ -18,7 +18,6 @@ class TransaksiBarangMasuk extends Model
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class, 'admin_id_admin');
+        return $this->belongsTo(User::class, 'admin_id_admin');
     }
 }
-

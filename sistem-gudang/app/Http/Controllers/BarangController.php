@@ -16,7 +16,6 @@ class BarangController extends Controller
 
     public function create()
     {
-       
         $raks = Rak::all();
         return view('pages.barang.create', compact('raks'));
     }
@@ -43,11 +42,10 @@ class BarangController extends Controller
     }
 
     public function edit(Barang $barang)
-{
-    $raks = Rak::all();
-    return view('pages.barang.edit', compact('barang', 'raks'));
-}
-
+    {
+        $raks = Rak::all();
+        return view('pages.barang.edit', compact('barang', 'raks'));
+    }
 
     public function update(Request $request, Barang $barang)
     {
