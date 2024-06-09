@@ -60,7 +60,7 @@
                     </div>
                 </form>
                 <p class="mb-0">
-                    <a href="/adm/create" class="text-center">Register/Tambah Admin</a>
+                    <a href="/adm/create" class="text-center">Register</a>
                 </p>
             </div>
             <!-- /.card-body -->
