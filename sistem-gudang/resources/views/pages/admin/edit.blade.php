@@ -10,11 +10,11 @@
         <!-- Formulir untuk mengedit data admin -->
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ $admin->username }}">
+            <input type="text" class="form-control" id="username" name="username" value="{{ $admin->username }}" readonly>
         </div>
         <div class="form-group">
-            <label for="password">Username</label>
-            <input type="password" class="form-control" id="password" name="password" value="{{ $admin->password }}">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password"">
         </div>
         <div class="form-group">
             <label for="nama">Nama</label>
