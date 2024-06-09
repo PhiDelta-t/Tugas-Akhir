@@ -13,4 +13,9 @@ class Rak extends Model
     protected $fillable = [
         'no_rak'
     ];
+
+    public function Barang()
+    {
+        return $this->belongsTo(Rak::class, 'rak_id');
+    }
 }

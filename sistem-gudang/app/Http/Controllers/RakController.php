@@ -11,7 +11,7 @@ class RakController extends Controller
         $rak = Rak::all();
         return view('pages.rak.index', ["rak" => $rak]);
     }
-
+ 
     public function create()
     {
         return view('pages.rak.create');

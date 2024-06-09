@@ -3,6 +3,7 @@
 @section('content')
     <h1>Daftar Barang</h1>
     <a href="{{ route('barang.create') }}" class="btn btn-primary">Tambah Barang</a>
+    
     <table class="table">
         <thead>
             <tr>

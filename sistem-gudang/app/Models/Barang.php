@@ -20,6 +20,7 @@ class Barang extends Model
     ];
     public function rak()
     {
-        return $this->belongsTo(Rak::class);
+        return $this->hasOne(Barang::class, 'rak_id');
     }
+    
 }
