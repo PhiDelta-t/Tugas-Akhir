@@ -13,7 +13,7 @@ class TransaksiBarangMasukController extends Controller
     public function index()
     {
         $barang_masuk = TransaksiBarangMasuk::all();
-        return view('barang_masuk.index', compact('barang_masuk'));
+        return view('pages.barang_masuk.index', compact('barang_masuk'));
     }
 
     public function create()
@@ -21,7 +21,7 @@ class TransaksiBarangMasukController extends Controller
         $barang = Barang::all();
         $supplier = Supplier::all();
         $admin = Admin::all();
-        return view('barang_masuk.create', ['barang' => $barang, 'supplier' => $supplier, 'admin' => $admin]);
+        return view('pages.barang_masuk.create', ['barang' => $barang, 'supplier' => $supplier, 'admin' => $admin]);
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class TransaksiBarangMasukController extends Controller
         $barang = Barang::all();
         $supplier = Supplier::all();
         $admin = Admin::all();
-        return view('barang_masuk.show', compact('masuk', 'barang', 'supplier', 'admin'));
+        return view('pages.barang_masuk.show', compact('masuk', 'barang', 'supplier', 'admin'));
     }
 
     public function edit(string $id)
