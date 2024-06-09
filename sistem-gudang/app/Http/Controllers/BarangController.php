@@ -16,7 +16,7 @@ class BarangController extends Controller
 
     public function create()
     {
-        $raks = Barang::all();
+        $raks = Rak::all();
         return view('pages.barang.create', compact('raks'));
     }
 
