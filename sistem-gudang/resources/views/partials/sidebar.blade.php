@@ -6,10 +6,10 @@
         </div>
         <div class="info">
             @if (Auth::check())
-            <a href="#" class="d-block">{{ session('username') }}</a>
-        @else
-            <a href="#" class="d-block">Kelompok 2</a>
-        @endif
+                <a href="#" class="d-block">{{ session('username') }}</a>
+            @else
+                <a href="#" class="d-block">Kelompok 2</a>
+            @endif
         </div>
     </div>
 
@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="barang" class="nav-link">
+                <a href="/barang" class="nav-link">
                     <i class="nav-icon fas fa-archive"></i>
                     <p>
                         Data Barang
@@ -58,7 +58,8 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-shopping-cart"></i> <!-- Mengganti kelas dari "fas fa-th" menjadi "fas fa-shopping-cart" -->
+                    <i class="nav-icon fas fa-shopping-cart"></i>
+                    <!-- Mengganti kelas dari "fas fa-th" menjadi "fas fa-shopping-cart" -->
                     <p>
                         Transaksi
                         <i class="right fas fa-angle-left"></i>
@@ -81,7 +82,8 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-file-alt"></i> <!-- Mengganti kelas dari "fas fa-th" menjadi "fas fa-file-alt" -->
+                    <i class="nav-icon fas fa-file-alt"></i>
+                    <!-- Mengganti kelas dari "fas fa-th" menjadi "fas fa-file-alt" -->
                     <p>
                         Laporan
                         <i class="right fas fa-angle-left"></i>
@@ -95,18 +97,18 @@
                         </a>
                     </li>
                 </ul>
-            </li>            
-           @if (auth()->check())
-            <li class="nav-item">
-                <a href="{{ route('logout') }}" class="nav-link" >
-                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>
-                    Logout
-                    <i class="right fas fa-angle"></i>
-                </p>
-            </a>
-        </li>
-    @endif
+            </li>
+            @if (auth()->check())
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Logout
+                            <i class="right fas fa-angle"></i>
+                        </p>
+                    </a>
+                </li>
+            @endif
     </nav>
     <!-- /.sidebar-menu -->
 </div>
