@@ -25,7 +25,7 @@
                 <h1><b>Login</b></h1>
             </div>
             <div class="card-body">
-                <form action="{{ route('proses') }}" method="post">
+                <form action="/proses" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" name="username" class="form-control" placeholder="Username">
@@ -60,7 +60,7 @@
                     </div>
                 </form>
                 <p class="mb-0">
-                    <a href="register.html" class="text-center">Register</a>
+                    <a href="/adm/create" class="text-center">Register</a>
                 </p>
             </div>
             <!-- /.card-body -->
