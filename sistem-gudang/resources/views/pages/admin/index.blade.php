@@ -36,9 +36,13 @@
                 </tr>
             @empty
                 <tr>
-                    <th>Tidak ada data supplier</th>
+                    <th>Tidak ada data Admin</th>
                 </tr>
             @endforelse
         </tbody>
     </table>
+    <br><br>
+    <p class="mb-0">
+        <a href="/login" class="text-center">Login</a>
+    </p>
 @endsection

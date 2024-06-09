@@ -2,10 +2,14 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="{{ asset('/admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset('/admin/dist/img/OIP.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
+            @if (Auth::check())
+            <a href="#" class="d-block">{{ session('username') }}</a>
+        @else
             <a href="#" class="d-block">Kelompok 2</a>
+        @endif
         </div>
     </div>
 
@@ -36,7 +40,7 @@
             </li>
             <li class="nav-item">
                 <a href="barang" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="nav-icon fas fa-archive"></i>
                     <p>
                         Data Barang
                         <i class="right fas fa-angle"></i>
@@ -44,8 +48,17 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="/rak" class="nav-link">
+                    <i class="nav-icon fas  fa-box"></i>
+                    <p>
+                        Rak
+                        <i class="right fas fa-angle"></i>
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="nav-icon fas fa-shopping-cart"></i> <!-- Mengganti kelas dari "fas fa-th" menjadi "fas fa-shopping-cart" -->
                     <p>
                         Transaksi
                         <i class="right fas fa-angle-left"></i>
@@ -68,7 +81,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="nav-icon fas fa-file-alt"></i> <!-- Mengganti kelas dari "fas fa-th" menjadi "fas fa-file-alt" -->
                     <p>
                         Laporan
                         <i class="right fas fa-angle-left"></i>
@@ -82,26 +95,18 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            
+            </li>            
+           @if (auth()->check())
             <li class="nav-item">
-                <a href="/rak" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Rak
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('logout') }}" class="nav-link">
+                <a href="{{ route('logout') }}" class="nav-link" >
                     <i class="nav-icon fas fa-sign-out-alt"></i>
-                    <p>
-                        Logout
-                        <i class="right fas fa-angle"></i>
-                    </p>
-                </a>
-            </li>
+                <p>
+                    Logout
+                    <i class="right fas fa-angle"></i>
+                </p>
+            </a>
+        </li>
+    @endif
     </nav>
     <!-- /.sidebar-menu -->
 </div>
