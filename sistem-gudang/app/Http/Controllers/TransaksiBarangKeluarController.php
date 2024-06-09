@@ -30,19 +30,25 @@ class TransaksiBarangKeluarController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate(TransaksiBarangKeluar::rules());
+        $request->validate([
+            'jumlah_keluar' => 'required|numeric|min:0',
+            'tanggal_keluar' => 'required|date',
+            'barang_id' => 'required',
+            'admin_id' => 'required',
+        ]);
 
-    $barang = Barang::find($request->barang_id);
-    if ($barang->jumlah_stok < $request->jumlah_keluar) {
-        return redirect()->back()->with('error', 'Jumlah keluar melebihi stok yang tersedia.');
-    }
+        
+        $transaksi_barang_keluar= new TransaksiBarangkeluar;
 
-    TransaksiBarangKeluar::create($request->all());
+        $transaksi_barang_keluar->jumlah_keluar = $request->jumlah_keluar;
+        $transaksi_barang_keluar->tanggal_keluar = $request->tanggal_keluar;
+        $transaksi_barang_keluar->barang_id = $request->barang_id;
+        $transaksi_barang_keluar->admin_id = $request->admin_id;
 
-    $barang->jumlah_stok -= $request->jumlah_keluar;
-    $barang->save();
+        $transaksi_barang_keluar->save();
 
-    return redirect()->route('barangkeluar')->with('success', 'Transaksi barang keluar berhasil ditambahkan.');
+        return redirect('/barangkeluar');
+
     }
 
     /**
