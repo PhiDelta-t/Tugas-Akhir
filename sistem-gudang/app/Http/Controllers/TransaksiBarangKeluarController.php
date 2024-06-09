@@ -12,7 +12,7 @@ class TransaksiBarangKeluarController extends Controller
     public function index()
     {
         $barang_keluar = TransaksiKeluar::all();
-        return view('barang_keluar.index', compact('barang_keluar'));
+        return view('pages.barang_keluar.index', compact('barang_keluar'));
     }
 
     /**
@@ -22,7 +22,7 @@ class TransaksiBarangKeluarController extends Controller
     {
         $barang = Barang::all();
         $admin = Admin::all();
-        return view('barang_keluar.add', ['barang' => $barang, 'admin' => $admin]);
+        return view('pages.barang_keluar.add', ['barang' => $barang, 'admin' => $admin]);
     }
 
     /**
@@ -70,7 +70,7 @@ class TransaksiBarangKeluarController extends Controller
         $keluar = TransaksiKeluar::findOrFail($id);
         $barang = Barang::all();
         $admin = Admin::all();
-        return view('barang_keluar.edit', compact('keluar', 'barang', 'admin'));
+        return view('pages.barang_keluar.edit', compact('keluar', 'barang', 'admin'));
     }
 
     /**
