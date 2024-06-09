@@ -29,7 +29,7 @@ class BarangController extends Controller
             'jumlah_stok' => 'required|integer',
             'tanggal_produksi' => 'required|date',
             'tanggal_kadaluarsa' => 'required|date',
-            'rak_id' => 'required|exists:rak,id'
+            'rak_id' => 'required|exists:raks,id'
         ]);
 
         Barang::create($request->all());
@@ -56,7 +56,7 @@ class BarangController extends Controller
             'jumlah_stok' => 'required|integer',
             'tanggal_produksi' => 'required|date',
             'tanggal_kadaluarsa' => 'required|date',
-            'rak_id' => 'required|exists:rak,id'
+            'rak_id' => 'required|exists:raks,id'
         ]);
 
         $barang->update($request->all());
