@@ -38,8 +38,8 @@
                             <form action="/barangmasuk/{{ $masuk->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="/barangmasuk/{{ $masuk->id }}" class="btn btn-info">View</a>
-                                <a href="/barangmasuk/{{ $masuk->id }}/edit" class="btn btn-warning">Edit</a>
+                                <a href="/barangmasuk/{{ $masuk->id }}" class="btn btn-info">Detail</a>
+                                <a href="/barangmasuk/{{ $masuk->id }}/edit" class="btn btn-primary">Edit</a>
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>

@@ -28,11 +28,12 @@
                     <td>{{ $barang->tanggal_kadaluarsa }}</td>
                     <td>{{ $barang->rak ? $barang->rak->no_rak : 'N/A' }}</td>
                     <td>
-                        <a href="{{ route('barang.show', $barang->id) }}" class="btn btn-info">Detail</a>
-                        <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-primary">Edit</a>
+                       
                         <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
+                            <a href="{{ route('barang.show', $barang->id) }}" class="btn btn-info">Detail</a>
+                            <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-primary">Edit</a>
                             <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Hapus</button>
                         </form>

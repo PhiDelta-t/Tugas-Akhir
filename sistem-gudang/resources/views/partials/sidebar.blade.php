@@ -89,7 +89,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/table" class="nav-link">
+                        <a href="/laporanstok" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Stok barang</p>
                         </a>

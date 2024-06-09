@@ -8,6 +8,7 @@ use App\Http\Controllers\TransaksiBarangKeluarController;
 use App\Http\Controllers\TransaksiBarangMasukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\RakController;
+use App\Http\Controllers\LaporanStokController;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
 
@@ -32,12 +33,12 @@ Route::post('/proses', [LoginController::class, 'proses'])->name('proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'auth'], function () {
-    
+    Route::resource('/barang', BarangController::class);
+    Route::resource('/supplier', SupplierController::class);
+    Route::resource('/rak', RakController::class);
+    Route::resource('/adm', AdminController::class);
+    Route::resource('/barangkeluar', TransaksiBarangKeluarController::class);
+    Route::resource('/barangmasuk', TransaksiBarangMasukController::class);
+    Route::get('/laporanstok', [LaporanStokController::class, 'index'])->name('pages.laporan.index');
     
 });
-Route::resource('/barang', BarangController::class);
-Route::resource('/supplier', SupplierController::class);
-Route::resource('/rak', RakController::class);
-Route::resource('/adm', AdminController::class);
-Route::resource('/barangkeluar', TransaksiBarangKeluarController::class);
-Route::resource('/barangmasuk', TransaksiBarangMasukController::class);

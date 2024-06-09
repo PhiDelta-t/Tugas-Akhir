@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $items->no_rak }}</td>
-                        <td>{{ $items->nama_barang }}</td>
+                        <td>{{ $items->barang->nama_barang }}</td>
                         <td>
                             <div class="d-flex">
                                 <a href="/rak/{{ $items->id }}" class="btn btn-info btn-sm mr-1">Show</a>

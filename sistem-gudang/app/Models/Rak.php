@@ -14,8 +14,10 @@ class Rak extends Model
         'no_rak'
     ];
 
-    public function Barang()
+    public function barang()
     {
-        return $this->hasOne(Rak::class, 'rak_id');
+        return $this->hasOne(Barang::class);
     }
+
+    
 }

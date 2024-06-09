@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Admin;
-use App\Models\Transaksikeluar;
+use App\Models\TransaksiBarangKeluar;
 
 class TransaksiBarangKeluarController extends Controller
 {
     public function index()
     {
-        $barang_keluar = TransaksiKeluar::all();
+        $barang_keluar = TransaksiBarangKeluar::all();
         return view('pages.barang_keluar.index', compact('barang_keluar'));
     }
 
@@ -30,25 +30,19 @@ class TransaksiBarangKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'jumlah_keluar' => 'required|numeric|min:0',
-            'tanggal_keluar' => 'required|date',
-            'barang_id' => 'required',
-            'admin_id' => 'required',
-        ]);
+    $request->validate(TransaksiBarangKeluar::rules());
 
-        
-        $transaksi_barang_keluar= new Transaksikeluar;
+    $barang = Barang::find($request->barang_id);
+    if ($barang->jumlah_stok < $request->jumlah_keluar) {
+        return redirect()->back()->with('error', 'Jumlah keluar melebihi stok yang tersedia.');
+    }
 
-        $transaksi_barang_keluar->jumlah_keluar = $request->jumlah_keluar;
-        $transaksi_barang_keluar->tanggal_keluar = $request->tanggal_keluar;
-        $transaksi_barang_keluar->barang_id = $request->barang_id;
-        $transaksi_barang_keluar->admin_id = $request->admin_id;
+    TransaksiBarangKeluar::create($request->all());
 
-        $transaksi_barang_keluar->save();
+    $barang->jumlah_stok -= $request->jumlah_keluar;
+    $barang->save();
 
-        return redirect('/barangkeluar');
-
+    return redirect()->route('barangkeluar')->with('success', 'Transaksi barang keluar berhasil ditambahkan.');
     }
 
     /**
@@ -56,10 +50,10 @@ class TransaksiBarangKeluarController extends Controller
      */
     public function show(string $id)
     {
-        $keluar = TransaksiKeluar::find($id);
+        $keluar = TransaksiBarangKeluar::find($id);
         $barang = Barang::all();
         $admin = Admin::all();
-        return view('barang_keluar.show', compact('keluar', 'barang', 'admin'));
+        return view('pages.barang_keluar.show', compact('keluar', 'barang', 'admin'));
     }
 
     /**
@@ -67,7 +61,7 @@ class TransaksiBarangKeluarController extends Controller
      */
     public function edit(string $id)
     {
-        $keluar = TransaksiKeluar::findOrFail($id);
+        $keluar = TransaksiBarangKeluar::findOrFail($id);
         $barang = Barang::all();
         $admin = Admin::all();
         return view('pages.barang_keluar.edit', compact('keluar', 'barang', 'admin'));
@@ -85,7 +79,7 @@ class TransaksiBarangKeluarController extends Controller
             'admin_id' => 'required',
         ]);
 
-        $transaksi_barang_keluar = Transaksikeluar::findOrFail($id);
+        $transaksi_barang_keluar = TransaksiBarangkeluar::findOrFail($id);
 
         $transaksi_barang_keluar->jumlah_keluar = $request->jumlah_keluar;
         $transaksi_barang_keluar->tanggal_keluar = $request->tanggal_keluar;
@@ -103,7 +97,7 @@ class TransaksiBarangKeluarController extends Controller
      */
     public function destroy($id)
     {
-        $transaksi_barang_keluar = Transaksikeluar::findOrFail($id);
+        $transaksi_barang_keluar = TransaksiBarangKeluar::findOrFail($id);
         $transaksi_barang_keluar->delete();
         return redirect('/barangkeluar');
     }

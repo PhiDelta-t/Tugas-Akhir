@@ -21,4 +21,9 @@ class TransaksiBarangMasuk extends Model
     {
         return $this->belongsTo(Admin::class);
     }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
 }

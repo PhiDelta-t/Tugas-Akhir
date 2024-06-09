@@ -63,7 +63,7 @@ class TransaksiBarangMasukController extends Controller
         $barang = Barang::all();
         $supplier = Supplier::all();
         $admin = Admin::all();
-        return view('barang_masuk.edit', compact('masuk', 'barang', 'supplier', 'admin'));
+        return view('pages.barang_masuk.edit', compact('masuk', 'barang', 'supplier', 'admin'));
     }
 
     public function update(Request $request, string $id)
