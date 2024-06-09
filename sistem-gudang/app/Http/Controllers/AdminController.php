@@ -31,7 +31,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $username = Auth::user()->username;
+        //$username = Auth::user()->username;
         $request->validate([
             'username' => 'required',
             'password' => 'required|min:6',
