@@ -36,9 +36,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/barang', BarangController::class);
     Route::resource('/supplier', SupplierController::class);
     Route::resource('/rak', RakController::class);
-    Route::resource('/adm', AdminController::class);
+   
     Route::resource('/barangkeluar', TransaksiBarangKeluarController::class);
     Route::resource('/barangmasuk', TransaksiBarangMasukController::class);
     Route::get('/laporanstok', [LaporanStokController::class, 'index'])->name('pages.laporan.index');
     
 });
+
+Route::resource('/adm', AdminController::class);
